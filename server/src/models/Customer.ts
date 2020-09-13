@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import Company from "./Company";
 
 @Entity('customers')
 class Customer {
@@ -18,11 +19,15 @@ class Customer {
   @Column()
   company_id: string;
 
+  @ManyToOne(() => Company)
+  @JoinColumn({ name: 'company_id' })
+  company: Company;
+
   @CreateDateColumn()
   created_at: Date;
 
   @UpdateDateColumn()
-  upadated_at: Date;
+  updated_at: Date;
 
 }
 
